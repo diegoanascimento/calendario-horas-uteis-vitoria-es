@@ -1,0 +1,1127 @@
+:root {
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --surface-soft: #f7fafc;
+  --surface-muted: #edf2f7;
+  --text: #1f2933;
+  --muted: #617080;
+  --line: #dce4ec;
+  --navy: #17324d;
+  --teal: #087f8c;
+  --green: #2f855a;
+  --amber: #b7791f;
+  --red: #c2413a;
+  --hero-start: #17324d;
+  --hero-end: #0b5d68;
+  --table-head: #eef6f7;
+  --table-hover: #f1f8f8;
+  --input-bg: #ffffff;
+  --shadow: 0 18px 45px rgba(31, 41, 51, 0.08);
+}
+
+body[data-theme="dark"] {
+  --bg: #101820;
+  --surface: #172331;
+  --surface-soft: #1d2b3a;
+  --surface-muted: #253447;
+  --text: #eef4f8;
+  --muted: #a7b6c5;
+  --line: #304256;
+  --navy: #d7ebff;
+  --teal: #39c1bf;
+  --green: #65d39b;
+  --amber: #f2bd63;
+  --red: #ff8b7f;
+  --hero-start: #0e1823;
+  --hero-end: #0b4d55;
+  --table-head: #203244;
+  --table-hover: #22384b;
+  --input-bg: #0f1923;
+  --shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(8, 127, 140, 0.12), transparent 32%),
+    linear-gradient(315deg, rgba(183, 121, 31, 0.11), transparent 28%),
+    var(--bg);
+  color: var(--text);
+  font-family:
+    Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.page-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 48px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: end;
+  padding: 30px;
+  background:
+    linear-gradient(135deg, var(--hero-start), var(--hero-end)),
+    var(--hero-start);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: #a7f3d0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 760px;
+  margin-bottom: 12px;
+  font-size: clamp(2rem, 3.8vw, 3.6rem);
+  line-height: 1.03;
+  letter-spacing: 0;
+}
+
+.hero-copy {
+  max-width: 680px;
+  margin-bottom: 0;
+  color: #d8e5f0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.hero-signature {
+  margin: 12px 0 0;
+  color: #a7f3d0;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas:
+    "theme hours"
+    "holidays year";
+  gap: 12px;
+  width: min(392px, 100%);
+  align-self: end;
+  margin: 0;
+}
+
+.field,
+.toggle,
+.theme-control {
+  min-width: 0;
+  min-height: 92px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.field-hours { grid-area: hours; }
+.field-year { grid-area: year; }
+.toggle-holidays { grid-area: holidays; }
+
+.field span,
+.toggle span {
+  color: #edf6ff;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 6px;
+  padding: 0 10px;
+  background: #fff;
+  color: #1f2933;
+  font-weight: 800;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.toggle input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  flex: 0 0 18px;
+  accent-color: #39c1bf;
+}
+
+.theme-control {
+  grid-area: theme;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Interruptor ilustrado dia/noite. Não depende de imagens nem de internet. */
+.sky-switch {
+  position: relative;
+  display: block;
+  isolation: isolate;
+  flex: 0 0 auto;
+  width: min(154px, 100%);
+  height: 54px;
+  overflow: hidden;
+  padding: 0;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  background: linear-gradient(125deg, #48b7fc 0%, #1088e3 100%);
+  box-shadow: inset 0 2px 5px rgba(0, 30, 65, 0.23), 0 3px 9px rgba(0, 0, 0, 0.13);
+  cursor: pointer;
+  transition: background 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sky-switch-clouds,
+.sky-switch-stars {
+  position: absolute;
+  inset: -2px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+
+.sky-switch-clouds {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.sky-switch-stars {
+  opacity: 0;
+  transform: translateX(-8px);
+}
+
+.sky-switch-thumb {
+  position: absolute;
+  z-index: 1;
+  top: 5px;
+  left: 5px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(195, 134, 0, 0.38);
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ffed5a 0%, #facc15 85%);
+  box-shadow: 0 2px 1px rgba(15, 26, 40, 0.35), 0 0 0 3px rgba(255, 239, 138, 0.12), inset 0 1px 2px rgba(255, 255, 255, 0.7);
+  transition: left 300ms cubic-bezier(.2,.75,.3,1), background 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+}
+
+.sky-switch-moon-spots { opacity: 0; transition: opacity 200ms ease; }
+.sky-switch-moon-spots i {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  background: rgba(90, 114, 130, 0.52);
+  box-shadow: inset 1px 1px 2px rgba(60, 80, 95, 0.28);
+}
+.sky-switch-moon-spots i:nth-child(1) { width: 12px; height: 12px; left: 8px; top: 9px; }
+.sky-switch-moon-spots i:nth-child(2) { width: 7px; height: 7px; right: 6px; top: 17px; }
+.sky-switch-moon-spots i:nth-child(3) { width: 6px; height: 6px; left: 15px; bottom: 5px; }
+
+body[data-theme="dark"] .sky-switch {
+  background: linear-gradient(125deg, #0c1524 0%, #28364d 100%);
+  border-color: rgba(208, 221, 237, 0.4);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55), 0 3px 9px rgba(0, 0, 0, 0.17);
+}
+
+body[data-theme="dark"] .sky-switch-clouds {
+  opacity: 0;
+  transform: translateX(7px);
+}
+
+body[data-theme="dark"] .sky-switch-stars {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+body[data-theme="dark"] .sky-switch-thumb {
+  left: calc(100% - 45px);
+  border-color: #c2cbd3;
+  background: linear-gradient(135deg, #edf0f2, #a6b2bf);
+  box-shadow: 0 2px 3px rgba(0,0,0,.45), inset 0 1px 2px rgba(255,255,255,.8);
+}
+
+body[data-theme="dark"] .sky-switch-moon-spots { opacity: 1; }
+
+.sky-switch:hover { filter: brightness(1.07); }
+.sky-switch:active .sky-switch-thumb { transform: scale(.95); }
+.sky-switch:focus-visible,
+.toggle:focus-within {
+  outline: 3px solid #a7f3d0;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky-switch,
+  .sky-switch-thumb,
+  .sky-switch-clouds,
+  .sky-switch-stars,
+  .sky-switch-moon-spots { transition: none; }
+}
+
+.summary-grid,
+.content-grid,
+.months-grid {
+  margin-top: 22px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.metric,
+.panel,
+.month-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(31, 41, 51, 0.06);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+body[data-theme="dark"] .metric,
+body[data-theme="dark"] .panel,
+body[data-theme="dark"] .month-card {
+  box-shadow: var(--shadow);
+}
+
+.metric {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.metric::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: linear-gradient(180deg, var(--teal), var(--amber));
+}
+
+.metric span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.metric strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--navy);
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
+  gap: 18px;
+}
+
+.side-stack {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  min-width: 0;
+}
+
+.panel {
+  min-width: 0;
+  padding: 20px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 16px;
+}
+
+.section-heading h2 {
+  margin-bottom: 0;
+  color: var(--navy);
+  font-size: 1.15rem;
+}
+
+.section-heading p {
+  max-width: 360px;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-align: right;
+}
+
+/* Resultado mensal: cabeçalhos, indicadores e totais compartilham
+   o mesmo eixo central; sem rolagem interna nas larguras de desktop. */
+.table-wrap {
+  min-width: 0;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  min-width: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.col-month {
+  width: 23%;
+}
+
+.col-weekdays {
+  width: 20%;
+}
+
+.col-holidays {
+  width: 21%;
+}
+
+.col-business {
+  width: 17%;
+}
+
+.col-hours {
+  width: 19%;
+}
+
+th,
+td {
+  padding: 12px 7px;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+th:first-child,
+td:first-child {
+  padding-left: 12px;
+  text-align: left;
+}
+
+th {
+  height: 48px;
+  background: var(--table-head);
+  color: var(--muted);
+  font-size: 0.71rem;
+  line-height: 1.3;
+  white-space: normal;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+td {
+  height: 52px;
+  font-weight: 700;
+}
+
+tbody tr:nth-child(even) {
+  background: var(--surface-soft);
+}
+
+tbody tr:hover {
+  background: var(--table-hover);
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+tfoot td {
+  height: 48px;
+  background: var(--surface-muted);
+  color: var(--navy);
+  font-size: 0.88rem;
+  font-weight: 900;
+}
+
+.month-name {
+  color: var(--navy);
+  font-weight: 900;
+}
+
+.month-badge,
+.value-pill,
+.holiday-pill,
+.hours-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 5px 9px;
+  border-radius: 999px;
+}
+
+.month-badge {
+  width: 100%;
+  max-width: 112px;
+  min-width: 0;
+  justify-content: center;
+  text-align: center;
+  margin-inline: auto;
+  background: rgba(8, 127, 140, 0.1);
+  color: var(--navy);
+  font-size: 0.84rem;
+}
+
+.value-pill,
+.holiday-pill {
+  min-width: 34px;
+}
+
+.value-pill {
+  background: var(--surface-muted);
+  color: var(--text);
+}
+
+.holiday-pill {
+  background: rgba(194, 65, 58, 0.12);
+  color: var(--red);
+}
+
+.hours-pill {
+  min-width: 66px;
+  background: rgba(47, 133, 90, 0.14);
+  color: var(--green);
+}
+
+.calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.calc-field {
+  display: grid;
+  gap: 7px;
+}
+
+.calc-field span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.calc-field input,
+.calc-field select {
+  width: 100%;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0 12px;
+  background: var(--input-bg);
+  color: var(--text);
+  font-weight: 800;
+}
+
+.calc-field input:focus,
+.calc-field select:focus,
+.field input:focus,
+.field select:focus {
+  border-color: var(--teal);
+  outline: 3px solid rgba(8, 127, 140, 0.18);
+}
+
+.calculator-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.calculator-result {
+  min-width: 0;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(8, 127, 140, 0.14), rgba(183, 121, 31, 0.12));
+  border: 1px solid rgba(8, 127, 140, 0.22);
+  border-radius: 8px;
+}
+
+.payment-result {
+  background: linear-gradient(135deg, rgba(47, 133, 90, 0.16), rgba(8, 127, 140, 0.12));
+  border-color: rgba(47, 133, 90, 0.26);
+}
+
+.calculator-result span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.calculator-result strong {
+  display: block;
+  max-width: 100%;
+  margin-top: 4px;
+  color: var(--navy);
+  font-size: clamp(1.55rem, 2.5vw, 2rem);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.payment-result strong {
+  white-space: nowrap;
+  letter-spacing: -0.025em;
+}
+
+.calculator-result p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.bar-chart {
+  display: grid;
+  gap: 12px;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 50px;
+  gap: 10px;
+  align-items: center;
+}
+
+.bar-label,
+.bar-value {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.bar-value {
+  text-align: right;
+}
+
+.bar-track {
+  position: relative;
+  display: block;
+  height: 14px;
+  overflow: hidden;
+  background: var(--surface-muted);
+  border-radius: 999px;
+}
+
+.bar-fill {
+  display: block;
+  height: 100%;
+  min-width: 0;
+  background: linear-gradient(90deg, var(--teal), var(--green));
+  border-radius: inherit;
+  transition: width 220ms ease;
+}
+
+.bar-row--max .bar-value {
+  color: var(--teal);
+}
+
+.bar-average-mark {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 2px dashed var(--navy);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.chart-note {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 0.77rem;
+  line-height: 1.4;
+}
+
+.chart-insights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.chart-insight {
+  min-width: 0;
+  padding: 10px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.chart-insight span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 0.73rem;
+  font-weight: 700;
+}
+
+.chart-insight strong {
+  display: block;
+  color: var(--navy);
+  font-size: 0.87rem;
+  overflow-wrap: anywhere;
+}
+
+.months-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.month-card {
+  display: grid;
+  gap: 14px;
+  min-height: 176px;
+  padding: 18px;
+  border-top: 4px solid var(--teal);
+}
+
+.month-card:hover {
+  transform: translateY(-2px);
+}
+
+.month-card header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.month-card h3 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 1.05rem;
+}
+
+.month-card strong {
+  color: var(--teal);
+  font-size: 1.5rem;
+}
+
+.card-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.card-stat {
+  padding: 10px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.card-stat span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.card-stat b {
+  display: block;
+  margin-top: 4px;
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.holiday-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.holiday-list li,
+.no-holidays {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.holiday-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
+}
+
+.holiday-date {
+  color: var(--red);
+  font-weight: 900;
+}
+
+.no-holidays {
+  margin: 0;
+}
+
+@media (max-width: 960px) {
+  .hero,
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .controls {
+    justify-self: end;
+  }
+
+  .summary-grid,
+  .months-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .section-heading {
+    display: grid;
+  }
+
+  .section-heading p {
+    max-width: none;
+    text-align: left;
+  }
+}
+
+@media (max-width: 620px) {
+  .page-shell {
+    width: min(100% - 20px, 1180px);
+    padding: 16px 0 28px;
+  }
+
+  .hero {
+    padding: 22px;
+  }
+
+  .controls {
+    width: 100%;
+  }
+
+  .summary-grid,
+  .months-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric strong {
+    font-size: 1.9rem;
+  }
+
+  .bar-row {
+    grid-template-columns: 34px minmax(0, 1fr) 46px;
+  }
+
+  .calculator-grid,
+  .calculator-results {
+    grid-template-columns: 1fr;
+  }
+
+  /* Em telas muito estreitas, rolar apenas a tabela. */
+  .table-wrap table {
+    min-width: 520px;
+  }
+
+  th,
+  td {
+    padding: 12px 7px;
+  }
+}
+
+/* Alinha exatamente o cabeçalho Mês, os meses e o Total no centro da primeira coluna. */
+.table-panel th:first-child,
+.table-panel td:first-child {
+  padding-left: 7px;
+  padding-right: 7px;
+  text-align: center;
+}
+
+.table-panel .month-badge {
+  display: flex;
+  margin-inline: auto;
+  justify-content: center;
+  text-align: center;
+}
+
+/* ===== Ajustes de layout / versão para publicação ===== */
+.hero { align-items: center; }
+.hero-signature {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 14px;
+}
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(167, 243, 208, .4);
+  border-radius: 9px;
+  background: rgba(255,255,255,.1);
+  color: #e6fff6;
+  text-decoration: none;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+.social-link svg { width: 19px; height: 19px; }
+.social-link:hover { background: rgba(255,255,255,.24); transform: translateY(-1px); }
+.social-link:focus-visible { outline: 3px solid #a7f3d0; outline-offset: 3px; }
+
+/* Cabeçalho: controles à esquerda compactos e campos à direita maiores.
+   A grade mantém as quatro posições, sem ampliar a moldura de tema/feriados. */
+.controls {
+  width: min(418px, 100%);
+  grid-template-columns: minmax(166px, .84fr) minmax(188px, 1fr);
+  grid-template-rows: 112px 112px;
+  column-gap: 12px;
+  row-gap: 12px;
+  align-items: stretch;
+  align-self: center;
+}
+.field-hours,
+.field-year {
+  height: 100%;
+  min-height: 0;
+  padding: 14px;
+}
+.field-hours input,
+.field-year select { height: 42px; }
+.theme-control {
+  min-height: 0;
+  height: auto;
+  width: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  align-self: center;
+  justify-self: center;
+}
+.sky-switch { width: 118px; height: 44px; }
+.sky-switch-thumb { width: 32px; height: 32px; top: 4px; left: 4px; }
+body[data-theme="dark"] .sky-switch-thumb { left: calc(100% - 36px); }
+.sky-switch-moon-spots i:nth-child(1) { width: 9px; height: 9px; left: 6px; top: 7px; }
+.sky-switch-moon-spots i:nth-child(2) { width: 6px; height: 6px; right: 5px; top: 13px; }
+.sky-switch-moon-spots i:nth-child(3) { width: 5px; height: 5px; left: 12px; bottom: 4px; }
+.toggle-holidays {
+  min-height: 0;
+  height: 43px;
+  width: max-content;
+  max-width: 100%;
+  justify-self: center;
+  align-self: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 10px;
+  white-space: nowrap;
+}
+.toggle-holidays input { width: 16px; height: 16px; flex-basis: 16px; }
+.toggle-holidays span { font-size: .78rem; white-space: nowrap; line-height: 1; }
+
+/* O Resultado mensal mantém a altura do conjunto de painéis da direita.
+   Somente as linhas da tabela recebem a altura complementar, evitando
+   a faixa vazia abaixo do Total. */
+.content-grid { align-items: stretch; }
+.table-panel {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+.table-panel .table-wrap {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+.table-panel .table-wrap table {
+  flex: 1 1 auto;
+  height: 100%;
+}
+
+/* Total anual aparece somente quando há uma taxa/hora positiva. */
+.summary-grid.has-annual { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.metric--annual strong {
+  font-size: clamp(1.36rem, 2vw, 1.85rem);
+  line-height: 1.16;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+.metric--annual small {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: .79rem;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+}
+[hidden] { display: none !important; }
+
+@media (max-width: 960px) {
+  .summary-grid.has-annual { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  .controls {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: 112px 112px;
+    gap: 10px;
+  }
+  .field-hours, .field-year { padding: 12px; }
+  .toggle-holidays { padding: 8px 6px; gap: 5px; }
+  .toggle-holidays span { font-size: clamp(.65rem, 2.8vw, .78rem); }
+  .summary-grid.has-annual { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 960px) {
+  .table-panel { align-self: auto; }
+  .table-panel .table-wrap { flex: initial; }
+  .table-panel .table-wrap table { height: auto; }
+}
+
+
+
+/* ===== Refinamento dos controles (28/10/2026) =====
+   O campo de ano e a caixa Descontar feriados terminam exatamente
+   na mesma linha de base. O switch volta a ter tamanho confortável,
+   sem comprometer a disposição de duas colunas. */
+.theme-control {
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+.sky-switch {
+  width: 118px;
+  height: 52px;
+}
+.sky-switch-thumb {
+  width: 40px;
+  height: 40px;
+  top: 4px;
+  left: 4px;
+}
+body[data-theme="dark"] .sky-switch-thumb {
+  left: calc(100% - 44px);
+}
+.sky-switch-moon-spots i:nth-child(1) { width: 12px; height: 12px; left: 8px; top: 9px; }
+.sky-switch-moon-spots i:nth-child(2) { width: 7px; height: 7px; right: 6px; top: 17px; }
+.sky-switch-moon-spots i:nth-child(3) { width: 6px; height: 6px; left: 15px; bottom: 5px; }
+.toggle-holidays {
+  height: 50px;
+  min-height: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 9px;
+  gap: 7px;
+  margin: 0;
+  white-space: nowrap;
+}
+.toggle-holidays input { flex: 0 0 16px; width: 16px; height: 16px; }
+.toggle-holidays span {
+  font-size: .76rem;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+@media (min-width: 621px) {
+  .controls {
+    grid-template-areas:
+      ". hours"
+      "left year";
+  }
+  .theme-control,
+  .toggle-holidays { grid-area: left; }
+  .theme-control {
+    align-self: start;
+    justify-self: end;
+  }
+  .toggle-holidays {
+    align-self: end;
+    justify-self: stretch;
+    width: 100%;
+    max-width: none;
+    margin-bottom: 0;
+  }
+}
+@media (max-width: 620px) {
+  .controls {
+    grid-template-areas:
+      "theme hours"
+      "holidays year";
+  }
+  .theme-control {
+    grid-area: theme;
+    justify-self: center;
+    align-self: center;
+  }
+  .toggle-holidays {
+    grid-area: holidays;
+    width: 100%;
+    justify-self: stretch;
+    align-self: end;
+    margin-bottom: 0;
+    gap: 5px;
+    padding: 7px 5px;
+  }
+  .toggle-holidays span { font-size: clamp(.67rem, 2.8vw, .76rem); }
+}
